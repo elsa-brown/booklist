@@ -46,7 +46,7 @@ class App extends Component {
       <ApolloProvider client={client}>
         <BrowserRouter>
           <div className="App">
-            <Link to="/" className="navbar">Definitive List</Link>
+            <Link to="/" className="navbar">Books I Want, Have, and Have Read</Link>
             <Switch>
               <Route exact path="/" component={TopicsListWithData}/>
               <Route path="/topics/:topicId" component={TopicDetails}/>

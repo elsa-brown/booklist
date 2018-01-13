@@ -14,6 +14,7 @@ type Topic {
 type Item {
 	id: ID!
 	name: String
+  topic: Topic
 }
 
 input ItemInput {
@@ -25,6 +26,7 @@ input ItemInput {
 type Query {
   topics: [Topic]
   topic(id: ID!): Topic
+  items(topicId: Int): [Item]
 }
 
 

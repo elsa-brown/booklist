@@ -52,7 +52,6 @@ div.NotFound {
   height: 30px;
   width: 30px;
   display: inline-block;
-  background-image: url('./apollo-logo.svg');
   background-size: contain;
   margin-right: 10px;
 }

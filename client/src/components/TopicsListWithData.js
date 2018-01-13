@@ -14,6 +14,8 @@ const TopicsList = ({ data: { loading, error, topics }}) => {
   }
 
   return (
+    <div>
+    <p>Show Book List | Show Topic List</p>
     <div className="channelsList">
       <AddTopic />
       { topics.map(topic =>
@@ -23,6 +25,7 @@ const TopicsList = ({ data: { loading, error, topics }}) => {
           </Link>
         </div>)
       )}
+    </div>
     </div>
   );
 };
@@ -37,5 +40,5 @@ export const topicsListQuery = gql`
 `;
 
 export default graphql(topicsListQuery, {
-  options: { pollInterval: 5000 },
+  options: { pollInterval: 10 },
 })(TopicsList);
