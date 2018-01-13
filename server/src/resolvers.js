@@ -1,49 +1,48 @@
-const channels = [{
+const topics = [{
   id: '1',
-  name: 'soccer',
-  messages: [{
+  name: 'tech',
+  description: 'tech books',
+  items: [{
     id: '1',
-    text: 'soccer is football',
-  }, {
-    id: '2',
-    text: 'hello soccer world cup',
+    name: 'Weaving The Web',
   }]
 }, {
   id: '2',
-  name: 'baseball',
-  messages: [{
-    id: '3',
-    text: 'baseball is life',
+  name: 'fiction',
+  description: 'fiction books',
+  items: [{
+    id: '2',
+    name: 'Microserfs',
   }, {
-    id: '4',
-    text: 'hello baseball world series',
+    id: '3',
+    name: 'A Room Of Ones Own',
   }]
 }];
 let nextId = 3;
-let nextMessageId = 5;
+let nextItemId = 5;
 
 export const resolvers = {
   Query: {
-    channels: () => {
-      return channels;
+    topics: () => {
+      return topics;
     },
-    channel: (root, { id }) => {
-      return channels.find(channel => channel.id === id);
-    },
+    topic: (root, { id }) => {
+      return topics.find(topic => topic.id === id);
+    }
   },
   Mutation: {
-    addChannel: (root, args) => {
-      const newChannel = { id: String(nextId++), messages: [], name: args.name };
-      channels.push(newChannel);
-      return newChannel;
+    addTopic: (root, args) => {
+      const newTopic = { id: String(nextId++), items: [], name: args.name };
+      topics.push(newTopic);
+      return newTopic;
     },
-    addMessage: (root, { message }) => {
-      const channel = channels.find(channel => channel.id === message.channelId);
-      if (!channel) throw new Error('Channel does not exist!')
-      
-      const newMessage = { id: String(nextMessageId++), text: message.text };
-      channel.messages.push(newMessage);
-      return newMessage;
+    addItem: (root, { item }) => {
+      const topic = topics.find(topic => topic.id === item.topicId);
+      if (!topic) throw new Error('topic does not exist!')
+
+      const newItem = { id: String(nextItemId++), name: item.name };
+      topic.items.push(newItem);
+      return newItem;
     }
   },
 };

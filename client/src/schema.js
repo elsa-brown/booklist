@@ -1,11 +1,11 @@
 export const typeDefs = `
 
-type Channel {
+type Category {
   id: ID!
   name: String
 }
 
 type Query {
-  channels: [Channel]
+  categories: [Category]
 }
 `;

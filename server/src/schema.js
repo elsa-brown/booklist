@@ -5,32 +5,33 @@ import {
 import { resolvers } from './resolvers';
 
 const typeDefs = `
-type Channel {
+type Topic {
   id: ID!                
   name: String
-  messages: [Message]!
+  items: [Item]!
 }
 
-type Message {
+type Item {
 	id: ID!
-	text: String
+	name: String
+}
+
+input ItemInput {
+  topicId: ID!
+  name: String
 }
 
 # Query type specifies entry points into our API
 type Query {
-  channels: [Channel]
-  channel(id: ID!): Channel   
+  topics: [Topic]
+  topic(id: ID!): Topic
 }
 
-input MessageInput {
-  channelId: ID!
-  text: String
-}
 
 # Mutation root type, used to define all mutations
 type Mutation {
-  addChannel(name: String!): Channel
-  addMessage(message: MessageInput!): Message
+  addTopic(name: String!): Topic
+  addItem(item: ItemInput!): Item
 }
 `;
 
