@@ -4,13 +4,14 @@ import AddItem from './AddItem';
 
 const ItemsList = ({ items }) => {
   return (
-    <div className="messagesList">
+    <div className="itemsList">
+      <AddItem />
       { items.map( item =>
-        (<div key={item.id} className={'message ' + (item.id < 0 ? 'optimistic' : '')}>
+        (<div key={item.id} className={'item ' + (item.id < 0 ? 'optimistic' : '')}>
             {item.name}
         </div>)
       )}
-      <AddItem />
+      
     </div>
   );
 };

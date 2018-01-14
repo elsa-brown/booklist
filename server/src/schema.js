@@ -14,11 +14,15 @@ type Topic {
 type Item {
 	id: ID!
 	name: String
+  detail: String
+  url: String
 }
 
 input ItemInput {
   topicId: ID!
   name: String
+  detail: String
+  url: String
 }
 
 # Query type specifies entry points into our API

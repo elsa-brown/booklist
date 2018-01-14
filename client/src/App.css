@@ -52,8 +52,6 @@ div.NotFound {
   height: 30px;
   width: 30px;
   display: inline-block;
-  background-image: url('./apollo-logo.svg');
-  background-size: contain;
   margin-right: 10px;
 }
 
@@ -125,12 +123,12 @@ div.channelName {
   color: #22A699;
 }
 
-div.messagesList {
+div.itemsList {
   padding: 0 30px;
   position: fixed;
 }
 
-div.message {
+div.item {
   position: relative;
   padding: 10px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -146,7 +144,7 @@ div.optimistic {
   color: rgba(255, 255, 255, 0.5);
 }
 
-div.messagesList input {
+div.itemsList input {
   width: 200px;
   background-color: transparent;
   padding: 10px 20px 10px 30px;
@@ -159,7 +157,7 @@ div.messagesList input {
   transition: 300ms all ease-out;
 }
 
-div.messageInput:before {
+div.itemInput:before {
   content: "+";
   display: inline-block;
   height: 0px;
@@ -171,12 +169,12 @@ div.messageInput:before {
   color: rgba(255, 255, 255, 0.6);
 }
 
-div.messagesList input:focus {
+div.itemsList input:focus {
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   transition: 300ms all ease-out;
 }
 
-div.message span {
+div.item span {
   position: absolute;
   left: 10px;
 }

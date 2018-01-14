@@ -6,7 +6,7 @@ import { withRouter } from 'react-router';
 
 const AddItem = ({ mutate, match }) => {
   const handleKeyUp = (evt) => {
-    console.log('evt.target.value ', evt.target.value)
+    console.log('evt.target.name ', evt.target.parentNode)
     if (evt.keyCode === 13) {
       mutate({ 
         variables: {
@@ -44,13 +44,17 @@ const AddItem = ({ mutate, match }) => {
   };
 
   return (
-    <div className="messageInput">
-      <input
-        type="text"
-        placeholder="New item"
-        onKeyUp={handleKeyUp}
-      />
-    </div>
+    <form className="itemInput" id="itemform">
+      <input type="text" name="title" placeholder="Title" onKeyUp={handleKeyUp} />
+      <input type="text" name="author" placeholder="Author" onKeyUp={handleKeyUp} />
+      <input type="url" name="url" placeholder="link" onKeyUp={handleKeyUp} />
+      <button>Add</button>
+      <select form="itemform">
+        <option value="have">Move To Have</option>
+        <option value="read">Move To Read</option>
+      </select>
+      <button>Move</button>
+    </form>
   );
 };
 
