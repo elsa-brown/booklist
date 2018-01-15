@@ -58,7 +58,7 @@ const createApp = () => {
 		cacheControl: true,
   })));
 
-	app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+	app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphiql' }));
 
   // error handling endware
   app.use((err, req, res, next) => {
