@@ -3,15 +3,21 @@ import { resolvers } from './resolvers';
 
 const typeDefs = `
 type Topic {
-  id: ID!                
+  id: Int                
   name: String
-  items: [Item]!
+  items: [Item]
 }
 
 type Item {
-	id: ID!
+	id: Int
 	name: String
   topic: Topic
+}
+
+type Query {
+  topics: [Topic]
+  topic(id: Int): Topic
+  items(topicId: Int): [Item]
 }
 
 input ItemInput {
@@ -19,15 +25,6 @@ input ItemInput {
   name: String
 }
 
-# Query type specifies entry points into our API
-type Query {
-  topics: [Topic]
-  topic(id: ID!): Topic
-  items(topicId: Int): [Item]
-}
-
-
-# Mutation root type, used to define all mutations
 type Mutation {
   addTopic(name: String!): Topic
   addItem(item: ItemInput!): Item
