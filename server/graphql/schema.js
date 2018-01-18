@@ -1,9 +1,9 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import { resolvers } from './resolvers';
+import resolvers from './resolvers';
 
 const typeDefs = `
 type Topic {
-  id: Int                
+  id: Int               
   name: String
   items: [Item]
 }
@@ -15,9 +15,9 @@ type Item {
 }
 
 type Query {
-  topics: [Topic]
+  allTopics: [Topic]
   topic(id: Int): Topic
-  items(topicId: Int): [Item]
+  allItems(topicId: Int): [Item]
 }
 
 input ItemInput {

@@ -3,22 +3,16 @@ import _ from 'lodash';
 
 const resolvers = {
   Query: {
-    topics: () => {
-      return Topic.findAll();
+    allTopics(_, args) {
+      console.log('in allTopics query!')
+      return Topic.findAll()
     },
-    topic: (root, { id }) => {
-      return Topic.findById({ id });
+    topic( _, args ) {
+      return Topic.findById(args.id);
     },
-    items: () => {
+    allItems(_, args) {
       return Item.findAll()
-    }
-  },
-  Topic: {
-    items(topic) {
-      return Item.findAll({
-        where: {topic: topic.name}
-      });
-    }
+    },
   },
   Item: {
     topic(item) {

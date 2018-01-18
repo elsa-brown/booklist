@@ -1,6 +1,6 @@
-import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import schema from './graphql/schema';
-// import { Engine } from 'apollo-engine';
+import { Engine } from 'apollo-engine';
 // import graphql from 'graphql';
 // import cors from 'cors';
 
@@ -8,34 +8,34 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const compression = require('compression');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./db');
 const sessionStore = new SequelizeStore({ db });
-const PORT = process.env.port || 3000;
-
+const PORT = process.env.port || 3002;
 const app = express();
 module.exports = app;
 
 // Apollo Engine setup
-// const engine = new Engine({
-//   engineConfig: {
-//     apiKey: process.env.ENGINE_API_KEY,
-//     stores: [
-//       {
-//         name: 'inMemEmbeddedCache',
-//         inMemory: {
-//           cacheSize: 20971520, // 20 MB
-//         },
-//       },
-//     ],
-//     queryCache: {
-//       publicFullQueryStore: 'inMemEmbeddedCache',
-//     },
-//   },
-//   graphqlPort: PORT,
-// });
-// engine.start();
+const engine = new Engine({
+  engineConfig: {
+    apiKey: 'service:elsa-brown-9026:ldL8VyFY8twL3m1GCOr3qg',
+    stores: [
+      {
+        name: 'inMemEmbeddedCache',
+        inMemory: {
+          cacheSize: 20971520, // 20 MB
+        },
+      },
+    ],
+    queryCache: {
+      publicFullQueryStore: 'inMemEmbeddedCache',
+    },
+  },
+  graphqlPort: PORT,
+});
+engine.start();
 
 const createApp = () => {
 
@@ -48,15 +48,21 @@ const createApp = () => {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 
+  // compression middleware
+  app.use(compression());
+
 	// static file-serving middleware
 	app.use(express.static(path.join(__dirname, '..', 'public')));
 
   // GraphQL setup
-  app.use('/graphql', bodyParser.json(), graphqlExpress(req => ({ 
-		schema,
-		tracing: true,
-		cacheControl: true,
-  })));
+  app.use('/graphql', bodyParser.json(), graphqlExpress(req => {
+    return {
+		  schema,
+		  tracing: true,
+		  // cacheControl: true,
+      context: { user: req.user },
+    }
+  }));
 
 	app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
@@ -67,6 +73,11 @@ const createApp = () => {
     res.status(err.status || 500).send(err.message || 'Internal server error.')
   })
 }
+
+ // sends index.html
+  // app.use('*', (req, res) => {
+  //   res.sendFile(path.join(__dirname, '..', 'public/index.html'));
+  // });
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)

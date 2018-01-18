@@ -1,31 +1,5 @@
-// import { _ } from 'lodash';
-// import faker from 'faker';
-// import Sequelize from 'sequelize';
+// this is where you could fetch external API's, using node-fetch module
+import { Topic, Item } from '../db/models';
 
-// const db = new Sequelize('booklist', null, null, {
-// 	dialect: 'sqlite',
-// 	storage: './booklist.sqlite',
-// 	logging: false
-// });
-
-// const TOPICS = 3;
-// const ITEMS_PER_TOPIC = 2;
-
-// db.sync({ force: true }).then(() => _.times(TOPICS, () =>
-// 	TopicModel.create({
-// 		name: faker.lorem.words(1),
-// 	}).then(topic => _.times(ITEMS_PER_TOPIC, () => {
-// 		return topic.createItem({
-// 			name: faker.lorem.words(3)
-// 		}).then((item) => {
-// 			console.log('{ name }', `{${item.name}}`)
-// 			return item;
-// 		})
-// 	}))
-// ));
-
-// const Topic = db.models.topic;
-// const Item = db.models.item;
-
-// export { Topic, Item };
+export { Topic, Item };
 
